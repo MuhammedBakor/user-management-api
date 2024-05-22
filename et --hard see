@@ -1,0 +1,9 @@
+[33m290bd50[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: Here the CRUD busniess logic were done
+[33m7afc778[m HEAD@{1}: reset: moving to HEAD~
+[33m5ab6292[m HEAD@{2}: reset: moving to HEAD
+[33m5ab6292[m HEAD@{3}: reset: moving to HEAD
+[33m5ab6292[m HEAD@{4}: reset: moving to HEAD
+[33m5ab6292[m HEAD@{5}: commit: see
+[33m7afc778[m HEAD@{6}: commit: Here Spring Data JPA is initialized and replaced with the fake data list.
+[33mdf1a47a[m HEAD@{7}: commit: Added Exception handling
+[33md3e8b3b[m HEAD@{8}: commit (initial): Initializing the project

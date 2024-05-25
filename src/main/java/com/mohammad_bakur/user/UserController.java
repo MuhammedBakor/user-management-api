@@ -1,6 +1,6 @@
 package com.mohammad_bakur.user;
 
-import com.mohammad_bakur.user.models.User;
+import com.mohammad_bakur.user.models.Client;
 import com.mohammad_bakur.user.requests.UserRegistrationRequest;
 import com.mohammad_bakur.user.requests.UserUpdateRequest;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +19,12 @@ public class UserController {
 
     //	@RequestMapping(path = "/api/va/users", method = RequestMethod.GET)
     @GetMapping("")
-    public List<User> getUsers(){
+    public List<Client> getUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("{id}")
-    public User getUser(@PathVariable("id") Integer id){
+    public Client getUser(@PathVariable("id") Integer id){
 
         return userService.getUser(id);
     }

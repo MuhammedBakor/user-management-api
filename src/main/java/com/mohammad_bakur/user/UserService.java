@@ -4,7 +4,7 @@ package com.mohammad_bakur.user;
 import com.mohammad_bakur.exceptions.RequestValidationException;
 import com.mohammad_bakur.exceptions.ResourceDuplicatedException;
 import com.mohammad_bakur.exceptions.ResourceNotFoundException;
-import com.mohammad_bakur.user.models.User;
+import com.mohammad_bakur.user.models.Client;
 import com.mohammad_bakur.user.requests.UserRegistrationRequest;
 import com.mohammad_bakur.user.requests.UserUpdateRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,11 +21,11 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public List<User> getAllUsers(){
+    public List<Client> getAllUsers(){
         return userDao.selectAllUser();
     }
 
-    public User getUser(Integer id){
+    public Client getUser(Integer id){
         return userDao.selectUserById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                 "User with id [%s] not found".formatted(id)));
@@ -41,12 +41,12 @@ public class UserService {
         }
 
         // add
-        User user = new User(
+        Client client = new Client(
                 request.name(),
                 request.email(),
                 request.age()
         );
-        userDao.insertUser(user);
+        userDao.insertUser(client);
     }
 
     public void deleteUserById(Integer id) {
@@ -62,27 +62,27 @@ public class UserService {
     public void updateUser(Integer id,
                                UserUpdateRequest request) {
         // TODO: for JPA use .getReferenceById(customerId) as it does does not bring object into memory and instead a reference
-        User user = getUser(id);
+        Client client = getUser(id);
 
         boolean changes = false;
 
-        if (request.name() != null && !request.name().equals(user.getName())) {
-            user.setName(request.name());
+        if (request.name() != null && !request.name().equals(client.getName())) {
+            client.setName(request.name());
             changes = true;
         }
 
-        if (request.age() != null && !request.age().equals(user.getAge())) {
-            user.setAge(user.getAge());
+        if (request.age() != null && !request.age().equals(client.getAge())) {
+            client.setAge(client.getAge());
             changes = true;
         }
 
-        if (request.email() != null && !request.email().equals(user.getEmail())) {
+        if (request.email() != null && !request.email().equals(client.getEmail())) {
             if (userDao.existsPersonWithEmail(request.email())) {
                 throw new ResourceDuplicatedException(
                         "email already taken"
                 );
             }
-            user.setEmail(request.email());
+            client.setEmail(request.email());
             changes = true;
         }
 
@@ -90,7 +90,7 @@ public class UserService {
             throw new RequestValidationException("no data changes found");
         }
 
-        userDao.updateUser(user);
+        userDao.updateUser(client);
     }
 }
 

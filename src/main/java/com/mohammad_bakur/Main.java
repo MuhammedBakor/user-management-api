@@ -1,6 +1,7 @@
 package com.mohammad_bakur;
 
-import com.mohammad_bakur.user.models.User;
+import com.github.javafaker.Faker;
+import com.mohammad_bakur.user.models.Client;
 import com.mohammad_bakur.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class Main {
@@ -30,15 +32,20 @@ public class Main {
 	@Bean
 	CommandLineRunner runner(UserRepository userRepo){
 		return args -> {
-			User alex = new User(
-					1, "Alex", "alex@gmail.com",21
+			Faker faker = new Faker();
+			Random random = new Random();
+			String firstname = faker.name().firstName();
+			String lastname = faker.name().lastName();
+			String fullname = firstname + " " +lastname;
+
+			Client client = new Client(
+					fullname,
+					firstname.toLowerCase()+"."+lastname.toLowerCase()+"@moody.com",
+					random.nextInt(16, 99)
 			);
 
-			User jamila = new User(
-					2, "Jamila", "jamila@gmail.com",19
-			);
-			List<User> users = List.of(alex, jamila);
-			userRepo.saveAll(users);
+
+			userRepo.save(client);
 		};
 	}
 }

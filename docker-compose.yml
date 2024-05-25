@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: postgres-users-management
+    container_name: postgres-person
     image: postgres
     environment:
       POSTGRES_USER: mohammad_bakur

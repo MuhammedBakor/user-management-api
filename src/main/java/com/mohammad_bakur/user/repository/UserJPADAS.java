@@ -1,6 +1,6 @@
 package com.mohammad_bakur.user.repository;
 
-import com.mohammad_bakur.user.models.User;
+import com.mohammad_bakur.user.models.Client;
 import com.mohammad_bakur.user.UserDAO;
 import org.springframework.stereotype.Repository;
 
@@ -18,18 +18,18 @@ public class UserJPADAS implements UserDAO {
 
 
     @Override
-    public List<User> selectAllUser() {
+    public List<Client> selectAllUser() {
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<User> selectUserById(Integer id) {
+    public Optional<Client> selectUserById(Integer id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public void insertUser(User user) {
-        userRepository.save(user);
+    public void insertUser(Client client) {
+        userRepository.save(client);
     }
     @Override
     public boolean existsPersonWithEmail(String email) {
@@ -45,7 +45,7 @@ public class UserJPADAS implements UserDAO {
     }
 
     @Override
-    public void updateUser(User entity) {
+    public void updateUser(Client entity) {
         userRepository.save(entity);
     }
 }

@@ -5,16 +5,22 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user-table")
-public class User{
+@Table(name = "client", uniqueConstraints = {
+        @UniqueConstraint(
+        name = "client_email_unique",
+        columnNames = "email"
+)})
+public class Client {
     @Id
     @SequenceGenerator(
-            name = "user_id_sequence",
-            sequenceName = "user_id_sequence"
+            name = "client_id_seq",
+            sequenceName = "client_id_seq",
+            initialValue = 1,
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_id_sequence"
+            generator = "client_id_seq"
 
     )
     private Integer id;
@@ -28,15 +34,15 @@ public class User{
     @Column(nullable = false)
     private Integer age;
 
-    public User(){}
+    public Client(){}
 
-    public User(String name, String email, Integer age) {
+    public Client(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
     }
 
-    public User(Integer id, String name, String email, Integer age) {
+    public Client(Integer id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -79,8 +85,8 @@ public class User{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(age, user.age);
+        Client client = (Client) o;
+        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(email, client.email) && Objects.equals(age, client.age);
     }
 
     @Override

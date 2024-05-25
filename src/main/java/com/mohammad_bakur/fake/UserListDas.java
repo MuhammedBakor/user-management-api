@@ -1,6 +1,6 @@
 package com.mohammad_bakur.fake;
 
-import com.mohammad_bakur.user.models.User;
+import com.mohammad_bakur.user.models.Client;
 import com.mohammad_bakur.user.UserDAO;
 import org.springframework.stereotype.Repository;
 
@@ -12,62 +12,62 @@ import java.util.Optional;
 public class UserListDas implements UserDAO {
 
     //db
-    private static List<User> users;
+    private static List<Client> clients;
 
     static{
-        users =new ArrayList<>();
+        clients =new ArrayList<>();
 
-        User alex = new User(
+        Client alex = new Client(
                 1, "Alex", "alex@gmail.com",21
         );
 
-        User jamila = new User(
+        Client jamila = new Client(
                 2, "Jamila", "jamila@gmail.com",19
         );
 
-        users.add(alex);
-        users.add(jamila);
+        clients.add(alex);
+        clients.add(jamila);
     }
 
     @Override
-    public List<User> selectAllUser() {
-        return users;
+    public List<Client> selectAllUser() {
+        return clients;
     }
 
     @Override
-    public Optional<User> selectUserById(Integer id) {
-            return users.stream()
+    public Optional<Client> selectUserById(Integer id) {
+            return clients.stream()
                     .filter(u -> u.getId().equals(id))
                     .findFirst();
     }
 
     @Override
-    public void insertUser(User user) {
-        users.add(user);
+    public void insertUser(Client client) {
+        clients.add(client);
     }
 
     @Override
     public boolean existsPersonWithEmail(String email) {
-        return users.stream()
+        return clients.stream()
                 .anyMatch(c -> c.getEmail().equals(email));
     }
 
     @Override
     public boolean existsPersonWithId(Integer id) {
-        return users.stream()
+        return clients.stream()
                 .anyMatch(c -> c.getId().equals(id));
     }
 
     @Override
     public void deleteUserById(Integer id) {
-        users.stream()
+        clients.stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()
-                .ifPresent(/* users::remove */u-> users.remove(u));
+                .ifPresent(/* users::remove */u-> clients.remove(u));
     }
 
     @Override
-    public void updateUser(User entity) {
-        users.add(entity);
+    public void updateUser(Client entity) {
+        clients.add(entity);
     }
 }

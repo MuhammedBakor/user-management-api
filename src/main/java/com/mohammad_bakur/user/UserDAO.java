@@ -1,17 +1,17 @@
 package com.mohammad_bakur.user;
 
-import com.mohammad_bakur.user.models.User;
+import com.mohammad_bakur.user.models.Client;
 
 import java.util.List;
 import java.util.Optional;
 
 
 public interface UserDAO {
-    public List<User> selectAllUser();
-    public Optional<User> selectUserById(Integer id);
-    void insertUser(User user);
+    public List<Client> selectAllUser();
+    public Optional<Client> selectUserById(Integer id);
+    void insertUser(Client client);
     boolean existsPersonWithEmail(String email);
     boolean existsPersonWithId(Integer id);
     void deleteUserById(Integer id);
-    void updateUser(User entity);
+    void updateUser(Client entity);
 }

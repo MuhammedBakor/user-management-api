@@ -1,18 +1,18 @@
 package com.mohammad_bakur.user.repository;
 
 import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.UserDAO;
+import com.mohammad_bakur.user.ClientDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository("jpa")
-public class UserJPADAS implements UserDAO {
+public class ClientJPADataAccessService implements ClientDAO {
 
     private final UserRepository userRepository;
 
-    public UserJPADAS(UserRepository userRepository) {
+    public ClientJPADataAccessService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

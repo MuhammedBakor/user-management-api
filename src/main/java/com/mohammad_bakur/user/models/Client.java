@@ -13,14 +13,14 @@ import java.util.Objects;
 public class Client {
     @Id
     @SequenceGenerator(
-            name = "client_id_seq",
-            sequenceName = "client_id_seq",
+            name = "client_id_seq1",
+            sequenceName = "client_id_seq1",
             initialValue = 1,
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "client_id_seq"
+            generator = "client_id_seq1"
 
     )
     private Integer id;

@@ -1,7 +1,7 @@
 package com.mohammad_bakur.fake;
 
 import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.UserDAO;
+import com.mohammad_bakur.user.ClientDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("list")
-public class UserListDas implements UserDAO {
+public class ClientListDas implements ClientDAO {
 
     //db
     private static List<Client> clients;

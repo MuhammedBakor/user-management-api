@@ -13,20 +13,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class ClientService {
 
-    private final UserDAO userDao;
+    private final ClientDAO clientDao;
 
-    public UserService(@Qualifier("jpa") UserDAO userDao) {
-        this.userDao = userDao;
+    public ClientService(@Qualifier("jdbc") ClientDAO clientDao) {
+        this.clientDao = clientDao;
     }
 
     public List<Client> getAllUsers(){
-        return userDao.selectAllUser();
+        return clientDao.selectAllUser();
     }
 
     public Client getUser(Integer id){
-        return userDao.selectUserById(id)
+        return clientDao.selectUserById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                 "User with id [%s] not found".formatted(id)));
     }
@@ -34,7 +34,7 @@ public class UserService {
     public void addUser(UserRegistrationRequest request){
         // check if email exists
         String email = request.email();
-        if (userDao.existsPersonWithEmail(email)) {
+        if (clientDao.existsPersonWithEmail(email)) {
             throw new ResourceDuplicatedException(
                     "email already taken"
             );
@@ -46,17 +46,17 @@ public class UserService {
                 request.email(),
                 request.age()
         );
-        userDao.insertUser(client);
+        clientDao.insertUser(client);
     }
 
     public void deleteUserById(Integer id) {
-        if (!userDao.existsPersonWithId(id)) {
+        if (!clientDao.existsPersonWithId(id)) {
             throw new ResourceNotFoundException(
                     "customer with id [%s] not found".formatted(id)
             );
         }
 
-        userDao.deleteUserById(id);
+        clientDao.deleteUserById(id);
     }
 
     public void updateUser(Integer id,
@@ -72,12 +72,12 @@ public class UserService {
         }
 
         if (request.age() != null && !request.age().equals(client.getAge())) {
-            client.setAge(client.getAge());
+            client.setAge(request.age());
             changes = true;
         }
 
         if (request.email() != null && !request.email().equals(client.getEmail())) {
-            if (userDao.existsPersonWithEmail(request.email())) {
+            if (clientDao.existsPersonWithEmail(request.email())) {
                 throw new ResourceDuplicatedException(
                         "email already taken"
                 );
@@ -90,7 +90,7 @@ public class UserService {
             throw new RequestValidationException("no data changes found");
         }
 
-        userDao.updateUser(client);
+        clientDao.updateUser(client);
     }
 }
 

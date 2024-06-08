@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface UserDAO {
+public interface ClientDAO {
     public List<Client> selectAllUser();
     public Optional<Client> selectUserById(Integer id);
     void insertUser(Client client);

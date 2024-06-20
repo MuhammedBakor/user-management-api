@@ -2,14 +2,13 @@ package com.mohammad_bakur;
 
 import com.github.javafaker.Faker;
 import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.repository.UserRepository;
+import com.mohammad_bakur.user.repository.ClientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
 import java.util.Random;
 
 @SpringBootApplication
@@ -30,7 +29,7 @@ public class Main {
 	}
 
 	@Bean
-	CommandLineRunner runner(UserRepository userRepo){
+	CommandLineRunner runner(ClientRepository userRepo){
 		return args -> {
 			Faker faker = new Faker();
 			Random random = new Random();

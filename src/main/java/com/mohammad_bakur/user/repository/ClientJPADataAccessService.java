@@ -10,42 +10,42 @@ import java.util.Optional;
 @Repository("jpa")
 public class ClientJPADataAccessService implements ClientDAO {
 
-    private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
 
-    public ClientJPADataAccessService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public ClientJPADataAccessService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
 
     @Override
     public List<Client> selectAllUser() {
-        return userRepository.findAll();
+        return clientRepository.findAll();
     }
 
     @Override
     public Optional<Client> selectUserById(Integer id) {
-        return userRepository.findById(id);
+        return clientRepository.findById(id);
     }
 
     @Override
     public void insertUser(Client client) {
-        userRepository.save(client);
+        clientRepository.save(client);
     }
     @Override
     public boolean existsPersonWithEmail(String email) {
-        return userRepository.existsUserByEmail(email);
+        return clientRepository.existsUserByEmail(email);
     }
     @Override
     public boolean existsPersonWithId(Integer id) {
-        return userRepository.existsUserById(id);
+        return clientRepository.existsUserById(id);
     }
     @Override
     public void deleteUserById(Integer id) {
-        userRepository.deleteById(id);
+        clientRepository.deleteById(id);
     }
 
     @Override
     public void updateUser(Client entity) {
-        userRepository.save(entity);
+        clientRepository.save(entity);
     }
 }

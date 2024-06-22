@@ -1,8 +1,8 @@
-package com.mohammad_bakur.user;
+package com.mohammad_bakur.client;
 
-import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.requests.UserRegistrationRequest;
-import com.mohammad_bakur.user.requests.UserUpdateRequest;
+import com.mohammad_bakur.client.requests.ClientRegistrationRequest;
+import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.client.requests.ClientUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class ClientController {
 
     @PostMapping
     public void registerUser(
-            @RequestBody UserRegistrationRequest request) {
+            @RequestBody ClientRegistrationRequest request) {
         clientService.addUser(request);
     }
     @DeleteMapping("{id}")
@@ -43,7 +43,7 @@ public class ClientController {
     @PutMapping("{id}")
     public void updateUser(
             @PathVariable("id") Integer id,
-            @RequestBody UserUpdateRequest request) {
+            @RequestBody ClientUpdateRequest request) {
         clientService.updateUser(id, request);
     }
 }

@@ -1,7 +1,7 @@
-package com.mohammad_bakur.user.repository;
+package com.mohammad_bakur.client.repository;
 
-import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.ClientDAO;
+import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.client.ClientDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,34 +18,34 @@ public class ClientJPADataAccessService implements ClientDAO {
 
 
     @Override
-    public List<Client> selectAllUser() {
+    public List<Client> selectAllClients() {
         return clientRepository.findAll();
     }
 
     @Override
-    public Optional<Client> selectUserById(Integer id) {
+    public Optional<Client> selectClientById(Integer id) {
         return clientRepository.findById(id);
     }
 
     @Override
-    public void insertUser(Client client) {
+    public void insertClient(Client client) {
         clientRepository.save(client);
     }
     @Override
-    public boolean existsPersonWithEmail(String email) {
-        return clientRepository.existsUserByEmail(email);
+    public boolean existsClientWithEmail(String email) {
+        return clientRepository.existsClientByEmail(email);
     }
     @Override
-    public boolean existsPersonWithId(Integer id) {
-        return clientRepository.existsUserById(id);
+    public boolean existsClientWithId(Integer id) {
+        return clientRepository.existsClientById(id);
     }
     @Override
-    public void deleteUserById(Integer id) {
+    public void deleteClientById(Integer id) {
         clientRepository.deleteById(id);
     }
 
     @Override
-    public void updateUser(Client entity) {
+    public void updateClient(Client entity) {
         clientRepository.save(entity);
     }
 }

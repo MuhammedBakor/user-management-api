@@ -1,8 +1,8 @@
-package com.mohammad_bakur.user.repository;
+package com.mohammad_bakur.client.repository;
 
-import com.mohammad_bakur.user.ClientDAO;
-import com.mohammad_bakur.user.ClientRowMapper;
-import com.mohammad_bakur.user.models.Client;
+import com.mohammad_bakur.client.ClientDAO;
+import com.mohammad_bakur.client.ClientRowMapper;
+import com.mohammad_bakur.client.models.Client;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public List<Client> selectAllUser() {
+    public List<Client> selectAllClients() {
         var sql = """
                 SELECT id, name, email, age
                 FROM client
@@ -31,7 +31,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public Optional<Client> selectUserById(Integer id) {
+    public Optional<Client> selectClientById(Integer id) {
         var sql = """
                 SELECT id, name, email, age
                 FROM client
@@ -42,7 +42,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public void insertUser(Client client) {
+    public void insertClient(Client client) {
         String sql = """
                 INSERT INTO client(name, email, age)
                 VALUES (?, ?, ?);
@@ -56,7 +56,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public boolean existsPersonWithEmail(String email) {
+    public boolean existsClientWithEmail(String email) {
         String sql = """
                 SELECT COUNT(id)
                 FROM Client
@@ -67,7 +67,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public boolean existsPersonWithId(Integer id) {
+    public boolean existsClientWithId(Integer id) {
         String sql = """
                 SELECT COUNT(id)
                 FROM Client
@@ -78,7 +78,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public void deleteUserById(Integer id) {
+    public void deleteClientById(Integer id) {
         String sql = """
                 DELETE
                 FROM Client
@@ -89,7 +89,7 @@ public class ClientJDBCDataAccessService implements ClientDAO {
     }
 
     @Override
-    public void updateUser(Client entity) {
+    public void updateClient(Client entity) {
         if(entity.getName() != null){
             String sql = """
                 UPDATE client SET name = ? WHERE id = ?

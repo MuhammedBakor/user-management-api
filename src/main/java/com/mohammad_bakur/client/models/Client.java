@@ -1,4 +1,4 @@
-package com.mohammad_bakur.user.models;
+package com.mohammad_bakur.client.models;
 
 import jakarta.persistence.*;
 

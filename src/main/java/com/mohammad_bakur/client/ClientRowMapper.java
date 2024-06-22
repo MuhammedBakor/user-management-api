@@ -1,6 +1,6 @@
-package com.mohammad_bakur.user;
+package com.mohammad_bakur.client;
 
-import com.mohammad_bakur.user.models.Client;
+import com.mohammad_bakur.client.models.Client;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

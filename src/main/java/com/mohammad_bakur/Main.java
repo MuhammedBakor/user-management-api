@@ -1,8 +1,8 @@
 package com.mohammad_bakur;
 
 import com.github.javafaker.Faker;
-import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.repository.ClientRepository;
+import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.client.repository.ClientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +15,7 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) {
+
 
 		ConfigurableApplicationContext applicationContext
 				= SpringApplication.run(Main.class, args);

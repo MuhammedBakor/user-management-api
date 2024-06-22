@@ -1,7 +1,7 @@
 package com.mohammad_bakur.fake;
 
-import com.mohammad_bakur.user.models.Client;
-import com.mohammad_bakur.user.ClientDAO;
+import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.client.ClientDAO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -30,36 +30,36 @@ public class ClientListDas implements ClientDAO {
     }
 
     @Override
-    public List<Client> selectAllUser() {
+    public List<Client> selectAllClients() {
         return clients;
     }
 
     @Override
-    public Optional<Client> selectUserById(Integer id) {
+    public Optional<Client> selectClientById(Integer id) {
             return clients.stream()
                     .filter(u -> u.getId().equals(id))
                     .findFirst();
     }
 
     @Override
-    public void insertUser(Client client) {
+    public void insertClient(Client client) {
         clients.add(client);
     }
 
     @Override
-    public boolean existsPersonWithEmail(String email) {
+    public boolean existsClientWithEmail(String email) {
         return clients.stream()
                 .anyMatch(c -> c.getEmail().equals(email));
     }
 
     @Override
-    public boolean existsPersonWithId(Integer id) {
+    public boolean existsClientWithId(Integer id) {
         return clients.stream()
                 .anyMatch(c -> c.getId().equals(id));
     }
 
     @Override
-    public void deleteUserById(Integer id) {
+    public void deleteClientById(Integer id) {
         clients.stream()
                 .filter(c -> c.getId().equals(id))
                 .findFirst()
@@ -67,7 +67,7 @@ public class ClientListDas implements ClientDAO {
     }
 
     @Override
-    public void updateUser(Client entity) {
+    public void updateClient(Client entity) {
         clients.add(entity);
     }
 }

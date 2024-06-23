@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "client_t", uniqueConstraints = {
+@Table(name = "client", uniqueConstraints = {
         @UniqueConstraint(
         name = "client_email_unique",
         columnNames = "email"
@@ -13,14 +13,14 @@ import java.util.Objects;
 public class Client {
     @Id
     @SequenceGenerator(
-            name = "client_id_seq1",
-            sequenceName = "client_id_seq1",
+            name = "client_id_seq",
+            sequenceName = "client_id_seq",
             initialValue = 1,
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "client_id_seq1"
+            generator = "client_id_seq"
 
     )
     private Integer id;

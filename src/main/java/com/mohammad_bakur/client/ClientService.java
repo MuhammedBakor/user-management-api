@@ -21,17 +21,17 @@ public class ClientService {
         this.clientDao = clientDao;
     }
 
-    public List<Client> getAllUsers(){
+    public List<Client> getAllClients(){
         return clientDao.selectAllClients();
     }
 
-    public Client getUser(Integer id){
+    public Client getClient(Integer id){
         return clientDao.selectClientById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                 "User with id [%s] not found".formatted(id)));
     }
 
-    public void addUser(ClientRegistrationRequest request){
+    public void addClient(ClientRegistrationRequest request){
         // check if email exists
         String email = request.email();
         if (clientDao.existsClientWithEmail(email)) {
@@ -49,20 +49,20 @@ public class ClientService {
         clientDao.insertClient(client);
     }
 
-    public void deleteUserById(Integer id) {
+    public void deleteClientById(Integer id) {
         if (!clientDao.existsClientWithId(id)) {
             throw new ResourceNotFoundException(
-                    "customer with id [%s] not found".formatted(id)
+                    "Client with id [%s] not found".formatted(id)
             );
         }
 
         clientDao.deleteClientById(id);
     }
 
-    public void updateUser(Integer id,
-                               ClientUpdateRequest request) {
+    public void updateClient(Integer id,
+                             ClientUpdateRequest request) {
         // TODO: for JPA use .getReferenceById(customerId) as it does does not bring object into memory and instead a reference
-        Client client = getUser(id);
+        Client client = getClient(id);
 
         boolean changes = false;
 

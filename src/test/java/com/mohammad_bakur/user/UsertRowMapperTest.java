@@ -1,23 +1,21 @@
-package com.mohammad_bakur.client;
+package com.mohammad_bakur.user;
 
-import com.mohammad_bakur.client.models.Client;
-import org.junit.jupiter.api.BeforeEach;
+import com.mohammad_bakur.user.models.Usert;
 import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class ClientRowMapperTest {
+class UsertRowMapperTest {
 
     @Test
     void mapRow() throws SQLException {
         // Given
-        ClientRowMapper clientRowMapper = new ClientRowMapper();
+        UserRowMapper userRowMapper = new UserRowMapper();
 
         ResultSet resultSet = mock(ResultSet.class);
 
@@ -27,10 +25,10 @@ class ClientRowMapperTest {
         when(resultSet.getString("email")).thenReturn("jamila@gmail.com");
 
         // When
-        Client actual = clientRowMapper.mapRow(resultSet, 1);
+        Usert actual = userRowMapper.mapRow(resultSet, 1);
 
         // Then
-        Client expected = new Client(
+        Usert expected = new Usert(
                 1, "Jamila", "jamila@gmail.com", 19
         );
         assertThat(actual).isEqualTo(expected);

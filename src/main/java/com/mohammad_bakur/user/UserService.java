@@ -1,88 +1,88 @@
-package com.mohammad_bakur.client;
+package com.mohammad_bakur.user;
 
 
-import com.mohammad_bakur.client.requests.ClientRegistrationRequest;
-import com.mohammad_bakur.client.requests.ClientUpdateRequest;
+import com.mohammad_bakur.user.models.Usert;
+import com.mohammad_bakur.user.requests.UserRegistrationRequest;
+import com.mohammad_bakur.user.requests.UserUpdateRequest;
 import com.mohammad_bakur.exceptions.RequestValidationException;
 import com.mohammad_bakur.exceptions.ResourceDuplicatedException;
 import com.mohammad_bakur.exceptions.ResourceNotFoundException;
-import com.mohammad_bakur.client.models.Client;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClientService {
+public class UserService {
 
-    private final ClientDAO clientDao;
+    private final UserDAO userDao;
 
-    public ClientService(@Qualifier("jdbc") ClientDAO clientDao) {
-        this.clientDao = clientDao;
+    public UserService(@Qualifier("jpa") UserDAO userDao) {
+        this.userDao = userDao;
     }
 
-    public List<Client> getAllClients(){
-        return clientDao.selectAllClients();
+    public List<Usert> getAllClients(){
+        return userDao.selectAllClients();
     }
 
-    public Client getClient(Integer id){
-        return clientDao.selectClientById(id)
+    public Usert getClient(Integer id){
+        return userDao.selectClientById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                 "User with id [%s] not found".formatted(id)));
     }
 
-    public void addClient(ClientRegistrationRequest request){
+    public void addClient(UserRegistrationRequest request){
         // check if email exists
         String email = request.email();
-        if (clientDao.existsClientWithEmail(email)) {
+        if (userDao.existsClientWithEmail(email)) {
             throw new ResourceDuplicatedException(
                     "email already taken"
             );
         }
 
         // add
-        Client client = new Client(
+        Usert usert = new Usert(
                 request.name(),
                 request.email(),
                 request.age()
         );
-        clientDao.insertClient(client);
+        userDao.insertClient(usert);
     }
 
     public void deleteClientById(Integer id) {
-        if (!clientDao.existsClientWithId(id)) {
+        if (!userDao.existsClientWithId(id)) {
             throw new ResourceNotFoundException(
                     "Client with id [%s] not found".formatted(id)
             );
         }
 
-        clientDao.deleteClientById(id);
+        userDao.deleteClientById(id);
     }
 
     public void updateClient(Integer id,
-                             ClientUpdateRequest request) {
+                             UserUpdateRequest request) {
         // TODO: for JPA use .getReferenceById(customerId) as it does does not bring object into memory and instead a reference
-        Client client = getClient(id);
+        Usert usert = getClient(id);
 
         boolean changes = false;
 
-        if (request.name() != null && !request.name().equals(client.getName())) {
-            client.setName(request.name());
+        if (request.name() != null && !request.name().equals(usert.getName())) {
+            usert.setName(request.name());
             changes = true;
         }
 
-        if (request.age() != null && !request.age().equals(client.getAge())) {
-            client.setAge(request.age());
+        if (request.age() != null && !request.age().equals(usert.getAge())) {
+            usert.setAge(request.age());
             changes = true;
         }
 
-        if (request.email() != null && !request.email().equals(client.getEmail())) {
-            if (clientDao.existsClientWithEmail(request.email())) {
+        if (request.email() != null && !request.email().equals(usert.getEmail())) {
+            if (userDao.existsClientWithEmail(request.email())) {
                 throw new ResourceDuplicatedException(
                         "email already taken"
                 );
             }
-            client.setEmail(request.email());
+            usert.setEmail(request.email());
             changes = true;
         }
 
@@ -90,7 +90,7 @@ public class ClientService {
             throw new RequestValidationException("no data changes found");
         }
 
-        clientDao.updateClient(client);
+        userDao.updateClient(usert);
     }
 }
 

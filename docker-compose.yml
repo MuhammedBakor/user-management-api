@@ -1,11 +1,12 @@
 services:
   db:
-    container_name: postgres-person
+    container_name: postgres-user-con
     image: postgres
     environment:
       POSTGRES_USER: mohammad_bakur
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
+      POSTGRES_DB: user_db
     volumes:
       - postgres:/data/postgres
     ports:
@@ -14,22 +15,22 @@ services:
       - postgres
     restart: unless-stopped
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-    ports:
-      - "5050:80"
-    networks:
-      - postgres
-    restart: unless-stopped
-    depends_on:
-      - db
+  # pgadmin:
+   # container_name: pgadmin
+    # image: dpage/pgadmin4
+    #environment:
+     # PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      #PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      #PGADMIN_CONFIG_SERVER_MODE: 'False'
+    #volumes:
+     # - pgadmin:/var/lib/pgadmin
+    #ports:
+     # - "5050:80"
+    #networks:
+     # - postgres
+    #restart: unless-stopped
+    #depends_on:
+     # - db
 
 networks:
   postgres:

@@ -1,6 +1,6 @@
-package com.mohammad_bakur.client.repository;
+package com.mohammad_bakur.user.repository;
 
-import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.user.models.Usert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,20 +8,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+class UsertJPADataAccessServiceTest {
 
-class ClientJPADataAccessServiceTest {
-
-    private ClientJPADataAccessService underTest;
+    private UserJPADataAccessService underTest;
     private AutoCloseable autoCloseable;
-    @Mock private ClientRepository clientRepository;
+    @Mock private UserRepository userRepository;
 
 
     @BeforeEach
     void setUp() {
         autoCloseable =
                 MockitoAnnotations.openMocks(this);
-        underTest = new ClientJPADataAccessService(clientRepository);
+        underTest = new UserJPADataAccessService(userRepository);
     }
 
     @AfterEach
@@ -35,7 +33,7 @@ class ClientJPADataAccessServiceTest {
         underTest.selectAllClients();
 
         //Then
-        Mockito.verify(clientRepository).findAll();
+        Mockito.verify(userRepository).findAll();
     }
 
     @Test
@@ -45,18 +43,18 @@ class ClientJPADataAccessServiceTest {
         //When
         underTest.selectClientById(id);
         //Then
-        Mockito.verify(clientRepository).findById(id);
+        Mockito.verify(userRepository).findById(id);
     }
 
     @Test
     void insertClient() {
         //Given
-        Client client = new Client(
+        Usert usert = new Usert(
                 1, "","",19);
         //When
-        underTest.insertClient(client);
+        underTest.insertClient(usert);
         //Then
-        Mockito.verify(clientRepository).save(client);
+        Mockito.verify(userRepository).save(usert);
     }
 
     @Test
@@ -68,7 +66,7 @@ class ClientJPADataAccessServiceTest {
         underTest.existsClientWithEmail(email);
 
         //Then
-        Mockito.verify(clientRepository).existsClientByEmail(email);
+        Mockito.verify(userRepository).existsClientByEmail(email);
     }
 
     @Test
@@ -80,7 +78,7 @@ class ClientJPADataAccessServiceTest {
         underTest.existsClientWithId(id);
 
         //Then
-        Mockito.verify(clientRepository).existsClientById(id);
+        Mockito.verify(userRepository).existsClientById(id);
     }
 
     @Test
@@ -92,20 +90,20 @@ class ClientJPADataAccessServiceTest {
         underTest.deleteClientById(1);
 
         //Then
-        Mockito.verify(clientRepository).deleteById(id);
+        Mockito.verify(userRepository).deleteById(id);
     }
 
     @Test
     void updateClient() {
         //Given
-        Client client = new Client(
+        Usert usert = new Usert(
                 1, "","",19
         );
 
         //When
-        underTest.updateClient(client);
+        underTest.updateClient(usert);
 
         //Then
-        Mockito.verify(clientRepository).save(client);
+        Mockito.verify(userRepository).save(usert);
     }
 }

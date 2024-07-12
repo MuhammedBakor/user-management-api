@@ -1,6 +1,6 @@
-package com.mohammad_bakur.client;
+package com.mohammad_bakur.user;
 
-import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.user.models.Usert;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class ClientRowMapper implements RowMapper<Client> {
+public class UserRowMapper implements RowMapper<Usert> {
     @Override
-    public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new Client(
+    public Usert mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return new Usert(
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getString("email"),

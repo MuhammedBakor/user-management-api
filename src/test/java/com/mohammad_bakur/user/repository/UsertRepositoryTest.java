@@ -1,26 +1,24 @@
-package com.mohammad_bakur.client.repository;
+package com.mohammad_bakur.user.repository;
 
 import com.mohammad_bakur.AbstractTestContainers;
-import com.mohammad_bakur.client.models.Client;
+import com.mohammad_bakur.user.models.Usert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class ClientRepositoryTest extends AbstractTestContainers {
+class UsertRepositoryTest extends AbstractTestContainers {
 
     @Autowired
-    private ClientRepository underTest;
+    private UserRepository underTest;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -35,12 +33,12 @@ class ClientRepositoryTest extends AbstractTestContainers {
     public void existsClientByEmail(){
 //Given
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        Client client = new Client(
+        Usert usert = new Usert(
                 FAKER.name().fullName(),
                 email,
                 20);
 
-        underTest.save(client);
+        underTest.save(usert);
 
         //When
         var actual = underTest.existsClientByEmail(email);
@@ -67,16 +65,16 @@ class ClientRepositoryTest extends AbstractTestContainers {
     public void existsClientById(){
         //Given
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        Client client = new Client(
+        Usert usert = new Usert(
                 FAKER.name().fullName(),
                 email,
                 20);
 
-        underTest.save(client);
+        underTest.save(usert);
         int id = underTest.findAll()
                 .stream()
                 .filter(c -> c.getEmail().equals(email))
-                .map(Client::getId)
+                .map(Usert::getId)
                 .findFirst()
                 .orElseThrow();
         //When

@@ -1,8 +1,8 @@
 package com.mohammad_bakur;
 
 import com.github.javafaker.Faker;
-import com.mohammad_bakur.client.models.Client;
-import com.mohammad_bakur.client.repository.ClientRepository;
+import com.mohammad_bakur.user.models.Usert;
+import com.mohammad_bakur.user.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,7 +30,7 @@ public class Main {
 	}
 
 	@Bean
-	CommandLineRunner runner(ClientRepository userRepo){
+	CommandLineRunner runner(UserRepository userRepo){
 		return args -> {
 			Faker faker = new Faker();
 			Random random = new Random();
@@ -38,14 +38,14 @@ public class Main {
 			String lastname = faker.name().lastName();
 			String fullname = firstname + " " +lastname;
 
-			Client client = new Client(
+			Usert usert = new Usert(
 					fullname,
 					firstname.toLowerCase()+"."+lastname.toLowerCase()+"@moody.com",
 					random.nextInt(16, 99)
 			);
 
 
-			userRepo.save(client);
+			//userRepo.save(usert);
 		};
 	}
 }

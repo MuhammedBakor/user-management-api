@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mohammad_bakur</groupId>
-	<artifactId>client-management-api</artifactId>
+	<artifactId>usert-management-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>client-management-api</name>
+	<name>usert-management-api</name>
 	<description>User management api project</description>
 	<properties>
 		<java.version>22</java.version>
@@ -74,6 +74,13 @@
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>1.19.8</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>3.2.5</version>
 			<scope>test</scope>
 		</dependency>
 

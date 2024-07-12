@@ -1,26 +1,26 @@
-package com.mohammad_bakur.client.models;
+package com.mohammad_bakur.user.models;
 
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "client", uniqueConstraints = {
+@Table(name = "usert", uniqueConstraints = {
         @UniqueConstraint(
-        name = "client_email_unique",
+        name = "user_email_unique",
         columnNames = "email"
 )})
-public class Client {
+public class Usert {
     @Id
     @SequenceGenerator(
-            name = "client_id_seq",
-            sequenceName = "client_id_seq",
+            name = "usert_id_seq",
+            sequenceName = "usert_id_seq",
             initialValue = 1,
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "client_id_seq"
+            generator = "usert_id_seq"
 
     )
     private Integer id;
@@ -34,15 +34,15 @@ public class Client {
     @Column(nullable = false)
     private Integer age;
 
-    public Client(){}
+    public Usert(){}
 
-    public Client(String name, String email, Integer age) {
+    public Usert(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
     }
 
-    public Client(Integer id, String name, String email, Integer age) {
+    public Usert(Integer id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -85,8 +85,8 @@ public class Client {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(email, client.email) && Objects.equals(age, client.age);
+        Usert usert = (Usert) o;
+        return Objects.equals(id, usert.id) && Objects.equals(name, usert.name) && Objects.equals(email, usert.email) && Objects.equals(age, usert.age);
     }
 
     @Override
